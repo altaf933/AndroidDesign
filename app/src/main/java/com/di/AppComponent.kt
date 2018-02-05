@@ -14,6 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(AppModule::class),
     (AndroidBindingModule::class),
+    (FragmentBuildersModule::class),
     (NetworkModule::class)
 ])
 interface AppComponent : AndroidInjector<MobiquityApp> {
