@@ -6,17 +6,24 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.factory.ViewModelFactory
+import javax.inject.Inject
 
 /**
  * Created by altafshaikh on 01/02/18.
  */
 class HomeFragment : Fragment() {
 
-    lateinit var homeViewModel: HomeViewModel;
+    //   @Inject lateinit var homeViewModel: HomeViewModel;
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel.getUserPosts()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

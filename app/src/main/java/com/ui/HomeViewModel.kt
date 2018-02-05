@@ -4,12 +4,13 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.api.ApiRepository
 import com.model.UserPost
+import javax.inject.Inject
 
 /**
  * Created by altafshaikh on 02/02/18.
  */
 
-class HomeViewModel(private val apiRepository: ApiRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val apiRepository: ApiRepository) : ViewModel() {
 
     private var listOupdate = MutableLiveData<List<UserPost>>()
     fun getUserPosts() {

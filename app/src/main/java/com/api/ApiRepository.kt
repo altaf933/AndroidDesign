@@ -4,11 +4,12 @@ import android.util.Log
 import com.ui.ApiCallback
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Created by altafshaikh on 05/02/18.
  */
-class ApiRepository(private val apiServices: ApiServices) {
+class ApiRepository @Inject constructor(private val apiServices: ApiServices) {
 
     /**
      * This function retrieve the list of user list.

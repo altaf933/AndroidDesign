@@ -4,6 +4,7 @@ import android.app.Application
 import com.MobiquityApp
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
@@ -12,7 +13,9 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = [(AppModule::class),
+@Component(modules = [
+    (AndroidInjectionModule::class),
+    (AppModule::class),
     (AndroidBindingModule::class),
     (FragmentBuildersModule::class),
     (NetworkModule::class)

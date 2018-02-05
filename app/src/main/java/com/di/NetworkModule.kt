@@ -1,7 +1,7 @@
 package com.di
 
-import com.api.ApiRepository
 import com.api.ApiServices
+import com.api.response.ApplicationJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.time.LocalDateTime
 import javax.inject.Singleton
 
 /**
@@ -19,17 +20,24 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    fun okHttpClient(okHttpClient: OkHttpClient): OkHttpClient {
+    fun okHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
                 .build()
     }
 
+    //(MoshiConverterFactory.create(Moshi.Builder()
+//    .add(ApplicationJsonAdapterFactory.INSTANCE)
+//    .add(LocalDateTime::class.java, LocalDateTimeAdapter())
+//    .build()))
     @Provides
-    fun retrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+    fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("http://jsonplaceholder.typicode.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+                        .add(ApplicationJsonAdapterFactory.INSTANCE).add(LocalDateTime::class.java)
+                        .build()))
                 .build()
     }
 
@@ -38,8 +46,8 @@ class NetworkModule {
     fun apiServices(retrofit: Retrofit) =
             retrofit.create(ApiServices::class.java)
 
-    fun provideApiRepository(apiServices: ApiServices) {
-        ApiRepository(apiServices)
-    }
+//    fun provideApiRepository(apiServices: ApiServices) {
+//        ApiRepository(apiServices)
+//    }
 
 }
