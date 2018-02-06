@@ -2,6 +2,7 @@ package com.di
 
 import com.api.ApiServices
 import com.api.response.ApplicationJsonAdapterFactory
+import com.api.response.LocalDateTimeAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -32,9 +33,17 @@ class NetworkModule {
                 .baseUrl("http://jsonplaceholder.typicode.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
-                        .add(ApplicationJsonAdapterFactory.INSTANCE).add(LocalDateTime::class.java)
+                        .add(ApplicationJsonAdapterFactory.INSTANCE).add(LocalDateTime::class.java, LocalDateTimeAdapter())
                         .build()))
                 .build()
+
+//                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+//                        .add(ApplicationJsonAdapterFactory.INSTANCE)
+//                        .add(org.threeten.bp.LocalDateTime::class.java, LocalDateTimeAdapter())
+//                        .build()))
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
+//                .build()
+
     }
     @Singleton
     @Provides
