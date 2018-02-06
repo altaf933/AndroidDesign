@@ -12,4 +12,6 @@ import dagger.Module
 interface  MainActivityModule {
     @Binds
     fun provideMainActivity(mainActivity: MainActivity) : AppCompatActivity
+
+
 }

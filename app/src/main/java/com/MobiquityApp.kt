@@ -13,12 +13,12 @@ import javax.inject.Inject
  * Created by altafshaikh on 01/02/18.
  */
 
-class MobiquityApp : Application(), HasActivityInjector {
+open class MobiquityApp : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
 
     override fun onCreate() {
         super.onCreate()
@@ -29,7 +29,13 @@ class MobiquityApp : Application(), HasActivityInjector {
     private fun configureDependencyInjection() {
         DaggerAppComponent.builder()
                 .application(this)
-                .create(this)
+                .build()
                 .inject(this)
+//        DaggerAppComponent.builder().application(app)
+//                .build().inject(app)
+//        DaggerAppComponent.builder()
+//                .application(this)
+//                .create(this)
+//                .inject(this)
     }
 }

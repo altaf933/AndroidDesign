@@ -2,23 +2,35 @@ package com.factory
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.api.ApiRepository
-import com.ui.HomeViewModel
 import javax.inject.Inject
+import javax.inject.Provider
+import javax.inject.Singleton
 
-/**
- * Created by altafshaikh on 05/02/18.
- */
-class ViewModelFactory @Inject constructor(private val apiRepository: ApiRepository)
-    : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return with(modelClass) {
-            when {
-                isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(apiRepository)
-                else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+
+@Singleton
+class ViewModelFactory @Inject constructor(
+        private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        var creator: Provider<out ViewModel>? = creators[modelClass]
+        if (creator == null) {
+            for ((key, value) in creators) {
+                if (modelClass.isAssignableFrom(key)) {
+                    creator = value
+                    break
+                }
             }
-        } as T
-
+        }
+        if (creator == null) {
+            throw IllegalArgumentException("unknown model class " + modelClass)
+        }
+        try {
+            @Suppress("UNCHECKED_CAST")
+            return creator.get() as T
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 }

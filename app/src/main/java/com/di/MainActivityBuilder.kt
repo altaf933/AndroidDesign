@@ -1,6 +1,9 @@
 package com.di
 
+import android.arch.lifecycle.ViewModelProvider
+import com.factory.ViewModelFactory
 import com.mobiquity.MainActivity
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -9,12 +12,12 @@ import dagger.android.ContributesAndroidInjector
  */
 
 @Module
-abstract class AndroidBindingModule {
+abstract class MainActivityBuilder {
 
     @ContributesAndroidInjector(
             modules = [MainActivityModule::class,
-                FragmentBuildersModule::class]
-    )
-    @ActivityScope
+                FragmentBuildersModule::class])
+
     abstract fun onMainActivity(): MainActivity
+
 }

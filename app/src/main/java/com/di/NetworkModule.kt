@@ -25,10 +25,6 @@ class NetworkModule {
                 .build()
     }
 
-    //(MoshiConverterFactory.create(Moshi.Builder()
-//    .add(ApplicationJsonAdapterFactory.INSTANCE)
-//    .add(LocalDateTime::class.java, LocalDateTimeAdapter())
-//    .build()))
     @Provides
     fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -40,14 +36,9 @@ class NetworkModule {
                         .build()))
                 .build()
     }
-
     @Singleton
     @Provides
     fun apiServices(retrofit: Retrofit) =
             retrofit.create(ApiServices::class.java)
-
-//    fun provideApiRepository(apiServices: ApiServices) {
-//        ApiRepository(apiServices)
-//    }
 
 }

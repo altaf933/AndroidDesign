@@ -1,4 +1,4 @@
-package com.di
+package com.di.annotation
 
 import javax.inject.Scope
 
