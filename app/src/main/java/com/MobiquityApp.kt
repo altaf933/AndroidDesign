@@ -24,6 +24,7 @@ open class MobiquityApp : Application(), HasActivityInjector {
         super.onCreate()
         AndroidThreeTen.init(this)
         configureDependencyInjection()
+        //applyAutoInjector()
     }
 
     private fun configureDependencyInjection() {
@@ -31,11 +32,5 @@ open class MobiquityApp : Application(), HasActivityInjector {
                 .application(this)
                 .build()
                 .inject(this)
-//        DaggerAppComponent.builder().application(app)
-//                .build().inject(app)
-//        DaggerAppComponent.builder()
-//                .application(this)
-//                .create(this)
-//                .inject(this)
     }
 }

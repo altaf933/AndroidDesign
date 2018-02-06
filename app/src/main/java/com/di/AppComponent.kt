@@ -14,15 +14,14 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    (ViewModelModule::class),
     (AndroidInjectionModule::class),
     (AndroidSupportInjectionModule::class),
+    (ActivityModule::class),
+    (FragmentBuildersModule::class),
     (AppModule::class),
-    (MainActivityBuilder::class),
     (NetworkModule::class)
 ])
 interface AppComponent {
-
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -30,6 +29,5 @@ interface AppComponent {
 
         fun build(): AppComponent
     }
-
     fun inject(app: MobiquityApp)
 }

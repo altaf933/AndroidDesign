@@ -1,8 +1,8 @@
 package com.mobiquity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import com.ui.HomeFragment
 import com.utils.FragmentNavigation
 import dagger.android.AndroidInjection
