@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by altafshaikh on 01/02/18.
  */
 
-open class MobiquityApp : Application(), HasActivityInjector {
+open class App : Application(), HasActivityInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>

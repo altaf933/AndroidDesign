@@ -2,7 +2,7 @@ package com.di
 
 import android.arch.lifecycle.ViewModelProvider
 import com.factory.ViewModelFactory
-import com.mobiquity.MainActivity
+import com.main.MainActivity
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -1,7 +1,7 @@
 package com.di
 
 import android.app.Application
-import com.MobiquityApp
+import com.App
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -28,5 +28,5 @@ interface AppComponent {
 
         fun build(): AppComponent
     }
-    fun inject(app: MobiquityApp)
+    fun inject(app: App)
 }

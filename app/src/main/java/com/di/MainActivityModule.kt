@@ -1,7 +1,7 @@
 package com.di
 
 import android.support.v7.app.AppCompatActivity
-import com.mobiquity.MainActivity
+import com.main.MainActivity
 import dagger.Binds
 import dagger.Module
 
