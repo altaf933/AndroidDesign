@@ -1,10 +1,11 @@
 package com.di
 
 import android.app.Application
-import com.MobiquityApp
+import com.App
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
+import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 /**
@@ -12,16 +13,20 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = [(AppModule::class),
-    (AndroidBindingModule::class),
+@Component(modules = [
+    (AndroidInjectionModule::class),
+    (AndroidSupportInjectionModule::class),
+    (MainActivityBuilder::class),
+    (AppModule::class),
     (NetworkModule::class)
 ])
-interface AppComponent : AndroidInjector<MobiquityApp> {
-
+interface AppComponent {
     @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<MobiquityApp>() {
-
+    interface Builder {
         @BindsInstance
-        abstract fun application(application: Application): AppComponent.Builder
+        fun application(application: Application): Builder
+
+        fun build(): AppComponent
     }
+    fun inject(app: App)
 }
