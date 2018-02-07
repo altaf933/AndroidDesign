@@ -24,7 +24,6 @@ open class App : Application(), HasActivityInjector {
         super.onCreate()
         AndroidThreeTen.init(this)
         configureDependencyInjection()
-        //applyAutoInjector()
     }
 
     private fun configureDependencyInjection() {
