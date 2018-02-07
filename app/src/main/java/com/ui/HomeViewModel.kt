@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.api.ApiRepository
 import com.model.UserPost
+import com.utils.rx.ScheduleProvider
 import javax.inject.Inject
 
 /**
