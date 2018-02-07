@@ -2,7 +2,6 @@ package com.api
 
 import com.model.UserPost
 import com.ui.ApiCallback
-import com.utils.rx.ScheduleProvider
 import javax.inject.Inject
 
 /**
