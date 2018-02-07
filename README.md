@@ -1,5 +1,7 @@
 # AndroidDesign
 
+#### I have decided to use this architecture as base when new project will start specially when using a MVVM architecture.
+
 This project has started to implement android below framework:
 
 To Do:
@@ -13,3 +15,5 @@ To Do:
 ### Base diagram:
 
 ![alt text](https://github.com/altaf933/AndroidDesign/blob/master/Untitled%20Diagram.png)
+
+### Note: We are still in development phase.
