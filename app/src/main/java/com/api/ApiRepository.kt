@@ -16,8 +16,8 @@ class ApiRepository @Inject constructor(private val apiServices: ApiServices,
     fun getUserPostList(apiCallback: ApiCallback) {
         apiGateway.subscribeFor(apiServices.getUsersPost(),
                 { result: List<UserPost> ->
-            apiCallback.successCallback(result)
-        }, { error: Throwable ->
+                    apiCallback.successCallback(result)
+                }, { error: Throwable ->
             apiCallback.errorCallback(error)
         })
     }

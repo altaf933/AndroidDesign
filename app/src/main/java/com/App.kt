@@ -27,9 +27,7 @@ open class App : Application(), HasActivityInjector {
     }
 
     private fun configureDependencyInjection() {
-        DaggerAppComponent.builder()
-                .application(this)
-                .build()
-                .inject(this)
+        DaggerAppComponent.builder().application(this)
+                .build().inject(this)
     }
 }

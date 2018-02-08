@@ -1,14 +1,31 @@
 package com.ui
 
-import org.junit.Assert.*
+import com.api.ApiRepository
+import com.api.ApiServices
+import com.model.UserPost
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.Mock
+import org.mockito.Mockito.mock
+import org.robolectric.RobolectricTestRunner
 
 /**
  * Created by altafshaikh on 08/02/18.
  */
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class HomeViewModelTest {
 
+    @Mock
+    private val apiServices: ApiServices = mock(ApiServices::class.java)
+
+    @Test
+    fun test_empty() {
+        apiServices.getUsersPost()
+    }
 }
+
+interface ApiCallback {
+    fun successCallback(listUserPost: List<UserPost>)
+    fun errorCallback(thr: Throwable)
+}
+
