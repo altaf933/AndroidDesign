@@ -2,6 +2,7 @@ package com.utils.rx
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.LiveDataReactiveStreams
+import android.arch.lifecycle.MutableLiveData
 import org.reactivestreams.Publisher
 
 /**

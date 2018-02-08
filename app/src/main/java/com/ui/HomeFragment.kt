@@ -5,6 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.common.ResultMapper
+import com.utils.rx.observe
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -26,6 +31,16 @@ class HomeFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getUserPosts()
+
+        viewModel.listOfPosts.observe(this, { result ->
+            when (result) {
+                is ResultMapper.Success -> {
+
+                }
+                is ResultMapper.Failure -> {
+                }
+            }
+        })
+
     }
 }

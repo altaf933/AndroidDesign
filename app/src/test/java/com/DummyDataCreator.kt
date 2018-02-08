@@ -11,7 +11,7 @@ object DummyDataCreator {
     fun getPosts(): List<UserPost> {
         var listMutableUserPost = mutableListOf<UserPost>()
         for (i in 1..10) {
-            var userPost = UserPost(i, "title $i", "body $i")
+            var userPost = UserPost(i, "title $i", "body $i",i)
             listMutableUserPost.add(userPost)
         }
         return listMutableUserPost

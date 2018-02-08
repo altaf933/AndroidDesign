@@ -3,6 +3,7 @@ package com.ui
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.support.annotation.VisibleForTesting
 import com.api.ApiServices
 import com.common.ResultMapper
 import com.model.UserPost
@@ -18,15 +19,17 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val apiServices: ApiServices,
                                         private val schedulerProvider: SchedulerProvider) : ViewModel() {
 
-    fun getUserPosts() {
-        val listOfUpdatedData: LiveData<ResultMapper<List<UserPost>>> by lazy {
-            apiServices.getUsersPost().toResult(schedulerProvider)
-                    .toLiveData()
-        }
-    }
-}
+    @VisibleForTesting
+    var listPostMutableLiveData = MutableLiveData<ResultMapper<List<UserPost>>>()
 
-interface ApiCallback {
-    fun successCallback(listUserPost: List<UserPost>)
-    fun errorCallback(thr: Throwable)
+    @VisibleForTesting
+    fun setLiveData(listOPost: List<UserPost>) {
+        listPostMutableLiveData.value = ResultMapper.success(listOPost)
+    }
+
+    val listOfPosts: LiveData<ResultMapper<List<UserPost>>> by lazy {
+        apiServices.getUsersPost().toResult(schedulerProvider)
+                .toLiveData()
+    }
+
 }

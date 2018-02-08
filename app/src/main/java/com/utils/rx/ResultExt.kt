@@ -14,7 +14,7 @@ fun <T> Flowable<T>.toResult(schedulerProvider: SchedulerProvider): Flowable<Res
     return compose { item ->
         item
                 .map { ResultMapper.success(it) }
-                .onErrorReturn { e -> ResultMapper.error(e ) }
+                .onErrorReturn { e -> ResultMapper.error(e) }
                 .observeOn(schedulerProvider.ui())
                 .subscribeOn(Schedulers.newThread())
     }
