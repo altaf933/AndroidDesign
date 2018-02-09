@@ -29,6 +29,7 @@ class HomeViewModel @Inject constructor(private val apiServices: ApiServices,
     val listOfPosts: LiveData<ResultMapper<List<UserPost>>> by lazy {
         apiServices.getUsersPost().toResult(schedulerProvider)
                 .toLiveData()
+
     }
 
 }
