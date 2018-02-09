@@ -18,13 +18,12 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val apiServices: ApiServices,
                                         private val schedulerProvider: SchedulerProvider) : ViewModel() {
-
     @VisibleForTesting
     var listPostMutableLiveData = MutableLiveData<ResultMapper<List<UserPost>>>()
 
     @VisibleForTesting
-    fun setLiveData(listOPost: List<UserPost>) {
-        listPostMutableLiveData.value = ResultMapper.success(listOPost)
+    fun setLiveData(listOPost: LiveData<ResultMapper<List<UserPost>>>) {
+        listPostMutableLiveData.value = listOPost.value
     }
 
     val listOfPosts: LiveData<ResultMapper<List<UserPost>>> by lazy {

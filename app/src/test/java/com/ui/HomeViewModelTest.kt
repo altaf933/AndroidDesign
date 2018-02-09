@@ -1,5 +1,6 @@
 package com.ui
 
+import android.arch.lifecycle.MutableLiveData
 import com.DummyDataCreator
 import com.api.ApiServices
 import com.common.ResultMapper
@@ -47,33 +48,37 @@ class HomeViewModelTest {
     @Test
     fun postslist_Basic() {
         val listOPost = DummyDataCreator.getPosts();
+        var listPostMutableLiveData = MutableLiveData<ResultMapper<List<UserPost>>>()
+        listPostMutableLiveData.value = ResultMapper.success(listOPost)
+
         whenever(apiServices.getUsersPost()).doReturn(Flowable.just(listOPost))
         homeViewModel = HomeViewModel(apiServices, TestSchedulerProvider())
-
         var result: Observer<ResultMapper<List<UserPost>>> = mock()
+
         homeViewModel.listPostMutableLiveData.observeForever(result)
         verifyNoMoreInteractions(result);
-        homeViewModel.setLiveData(listOPost)
+        homeViewModel.setLiveData(listPostMutableLiveData)
 
-        verify(apiServices).getUsersPost()
+        //verify(apiServices).getUsersPost()
         verify(result).onChanged(ResultMapper.success(listOPost.map { it as UserPost }))
     }
 
     @Test
     fun postsError() {
-//        val error = RuntimeException("test")
         val runtimeException = RuntimeException("test")
+
+        var listPostMutableLiveData = MutableLiveData<ResultMapper<List<UserPost>>>()
+        listPostMutableLiveData.value = ResultMapper.error(runtimeException)
+
         whenever(apiServices.getUsersPost()).doReturn(Flowable.error(runtimeException))
         homeViewModel = HomeViewModel(apiServices, TestSchedulerProvider())
 
         val result: Observer<ResultMapper<List<UserPost>>> = mock()
         homeViewModel.listPostMutableLiveData.observeForever(result)
+        homeViewModel.setLiveData(listPostMutableLiveData)
 
-//        var item = ResultMapper.error(runtimeException.message,runtimeException)
-
-//        homeViewModel.setLiveData(ResultMapper.error(RuntimeException("Test")))
-//        verify(apiServices).getUsersPost()
-//        verify(result).onChanged(ResultMapper.error(error))
+       // verify(apiServices).getUsersPost()
+        verify(result).onChanged(ResultMapper.error(runtimeException))
     }
 }
 
