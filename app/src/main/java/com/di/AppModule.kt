@@ -2,6 +2,7 @@ package com.di
 
 import android.app.Application
 import android.content.Context
+import com.utils.rx.SchedulerProvider
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

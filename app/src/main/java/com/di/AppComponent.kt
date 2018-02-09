@@ -18,14 +18,16 @@ import javax.inject.Singleton
     (AndroidSupportInjectionModule::class),
     (MainActivityBuilder::class),
     (AppModule::class),
-    (NetworkModule::class)
+    (NetworkModule::class),
+    (SchedulerModule::class)
 ])
 interface AppComponent {
     @Component.Builder
     interface Builder {
-        @BindsInstance
-        fun application(application: Application): Builder
+        @BindsInstance fun application(application: Application): Builder
+
         fun build(): AppComponent
     }
     fun inject(app: App)
 }
+

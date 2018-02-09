@@ -1,6 +1,8 @@
 package com.api
 
+import android.support.annotation.CheckResult
 import com.model.UserPost
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,4 +17,7 @@ interface ApiServices {
 
     @GET("posts/{id}")
     fun getUserPostDetail(@Path("id") id: Int): Flowable<UserPost>
+
+    @CheckResult
+    fun refreshPost(): Completable
 }
