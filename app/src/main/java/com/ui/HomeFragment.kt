@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.common.ResultMapper
+import com.utils.rx.observe
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
