@@ -25,7 +25,6 @@ interface AppComponent {
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
-
         fun build(): AppComponent
     }
     fun inject(app: App)

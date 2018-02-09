@@ -3,6 +3,7 @@ package com.ui
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.api.ApiRepository
+import com.common.ResultMapper
 import com.model.UserPost
 import javax.inject.Inject
 
@@ -12,13 +13,17 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val apiRepository: ApiRepository) : ViewModel() {
 
-    private var listOupdate = MutableLiveData<List<UserPost>>()
+    //    private var listOupdate = MutableLiveData<List<UserPost>>()
+    private var listOupdate = MutableLiveData<ResultMapper<List<UserPost>>>()
+
     fun getUserPosts() {
         apiRepository.getUserPostList(object : ApiCallback {
             override fun successCallback(listUserPost: List<UserPost>) {
-                listOupdate.value = listUserPost
+                listOupdate.value = ResultMapper.success(listUserPost)
             }
+
             override fun errorCallback(thr: Throwable) {
+                listOupdate.value = ResultMapper.error(thr)
             }
         })
     }
