@@ -1,6 +1,5 @@
 # AndroidDesign
 
-#### I have decided to use this architecture as base when new project will start specially when using a MVVM architecture.
 
 This project has started to implement android below framework:
 
