@@ -1,6 +1,7 @@
 package com.utils.rx
 
 import com.common.ResultMapper
+import com.model.UserPost
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 

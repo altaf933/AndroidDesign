@@ -1,5 +1,7 @@
 package com.db;
 
+import android.arch.lifecycle.LiveData
+import com.common.ResultMapper
 import com.model.UserPost
 import io.reactivex.Flowable
 
@@ -12,4 +14,6 @@ interface UsersPostsRepository {
     fun getPosts(): Flowable<List<UserPost>>
 
     fun savePosts(userPost: UserPost)
+
+    fun remoteData(): LiveData<ResultMapper<List<UserPost>>>
 }

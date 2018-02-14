@@ -2,7 +2,9 @@ package com.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
+import com.api.ApiServices
 import com.db.*
+import com.utils.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -24,6 +26,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserPostsDatabase(appDatabase: AppDatabase, userPostsDao: UserPostsDao): UsersPostsRepository =
-            UsersPostsDataRepository(appDatabase, userPostsDao)
+    fun provideUserPostsDatabase(apiServices: ApiServices,
+                                 appDatabase: AppDatabase,
+                                 schedulerProvider: SchedulerProvider,
+                                 userPostsDao: UserPostsDao): UsersPostsRepository =
+            UsersPostsDataRepository(apiServices, appDatabase,
+                                    schedulerProvider, userPostsDao)
 }
