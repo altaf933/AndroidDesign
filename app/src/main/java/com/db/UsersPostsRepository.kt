@@ -7,7 +7,7 @@ import io.reactivex.Flowable
  * Created by altafshaikh on 13/02/18.
  */
 
-interface PostDatabase {
+interface UsersPostsRepository {
 
     fun getPosts(): Flowable<List<UserPost>>
 

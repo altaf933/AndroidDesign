@@ -1,7 +1,7 @@
 package com.repository
 
 import com.api.ApiServices
-import com.db.PostDatabase
+import com.db.UsersPostsRepository
 import com.model.UserPost
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -12,7 +12,7 @@ import javax.inject.Inject
  */
 
 class PostDataRepository @Inject constructor(api: ApiServices,
-                                             postDatabase: PostDatabase) : PostsRepository {
+                                             postDatabase: UsersPostsRepository) : PostsRepository {
 
     override fun getUsersPost(): Flowable<List<UserPost>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

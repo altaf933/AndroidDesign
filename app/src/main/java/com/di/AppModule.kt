@@ -2,10 +2,7 @@ package com.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import android.content.Context
-import com.db.AppDatabase
-import com.utils.rx.SchedulerProvider
-import dagger.Binds
+import com.db.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,7 +10,6 @@ import javax.inject.Singleton
 /**
  * Created by altafshaikh on 01/02/18.
  */
-
 @Module(includes = [(ViewModelModule::class)])
 class AppModule {
 
@@ -25,4 +21,9 @@ class AppModule {
     @Provides
     @Singleton
     fun providePostsDao(appDatabase: AppDatabase) = appDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideUserPostsDatabase(appDatabase: AppDatabase, userPostsDao: UserPostsDao): UsersPostsRepository =
+            UsersPostsDataRepository(appDatabase, userPostsDao)
 }
