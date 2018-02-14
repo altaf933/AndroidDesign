@@ -3,6 +3,7 @@ package com.db
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.common.ResultMapper
 import com.model.UserPost
@@ -17,6 +18,6 @@ interface UserPostsDao {
     @Query("SELECT * FROM posts")
     fun getAllPost(): LiveData<List<UserPost>>
 
-    @Insert
-    fun insertData(userPost: UserPost)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertData(listUserPost: List<UserPost>)
 }

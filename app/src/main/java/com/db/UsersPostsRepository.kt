@@ -13,7 +13,7 @@ interface UsersPostsRepository {
 
     fun getPosts(): Flowable<List<UserPost>>
 
-    fun savePosts(userPost: UserPost)
+    fun savePosts(userPost: ResultMapper<List<UserPost>>)
 
     fun remoteData(): LiveData<ResultMapper<List<UserPost>>>
 }

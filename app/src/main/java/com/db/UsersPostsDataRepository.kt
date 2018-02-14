@@ -20,6 +20,12 @@ class UsersPostsDataRepository @Inject constructor(private val api: ApiServices,
                                                    private val userPostsDao: UserPostsDao) : UsersPostsRepository {
     override fun remoteData(): LiveData<ResultMapper<List<UserPost>>> {
         return api.getUsersPost().toResult(schedulerProvider)
+                .compose { item ->
+                    item.map {
+                        savePosts(it)
+                        it
+                    }
+                }
                 .toLiveData()
     }
 
@@ -27,13 +33,12 @@ class UsersPostsDataRepository @Inject constructor(private val api: ApiServices,
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun savePosts(userPost: UserPost) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun savePosts(userPost: ResultMapper<List<UserPost>>) {
+        if (userPost is ResultMapper.Success) {
+            appDatabase.runInTransaction {
+                userPostsDao.insertData(userPost.data)
+            }
+        }
     }
 
-
-    val listOfPosts: LiveData<ResultMapper<List<UserPost>>> by lazy {
-        api.getUsersPost().toResult(schedulerProvider)
-                .toLiveData()
-    }
 }
