@@ -15,7 +15,7 @@ import com.model.UserPost
 interface UserPostsDao {
 
     @Query("SELECT * FROM posts")
-    fun getAllPost(): LiveData<ResultMapper<List<UserPost>>>
+    fun getAllPost(): LiveData<List<UserPost>>
 
     @Insert
     fun insertData(userPost: UserPost)
