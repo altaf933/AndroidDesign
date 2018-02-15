@@ -17,9 +17,7 @@ import javax.inject.Inject
  * Created by altafshaikh on 02/02/18.
  */
 
-class HomeViewModel @Inject constructor(private val apiServices: ApiServices,
-                                        private val schedulerProvider: SchedulerProvider,
-                                        private val repository: UsersPostsRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: UsersPostsRepository) : ViewModel() {
     @VisibleForTesting
     var listPostMutableLiveData = MutableLiveData<ResultMapper<List<UserPost>>>()
 
@@ -29,6 +27,6 @@ class HomeViewModel @Inject constructor(private val apiServices: ApiServices,
     }
 
     val listOfPosts: LiveData<ResultMapper<List<UserPost>>> by lazy {
-         repository.remoteData()
+        repository.remoteData()
     }
 }
