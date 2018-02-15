@@ -8,6 +8,9 @@ import com.utils.rx.SchedulerProvider
 import com.utils.rx.toLiveData
 import com.utils.rx.toResult
 import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -35,9 +38,14 @@ class UsersPostsDataRepository @Inject constructor(private val api: ApiServices,
 
     override fun savePosts(userPost: ResultMapper<List<UserPost>>) {
         if (userPost is ResultMapper.Success) {
-            appDatabase.runInTransaction {
-                userPostsDao.insertData(userPost.data)
-            }
+
+            Observable.just(appDatabase)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe { db ->
+                        db.runInTransaction {
+                            userPostsDao.clearAndInsert(userPost.data)
+                        }
+                    }
         }
     }
 

@@ -1,11 +1,7 @@
 package com.db
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import com.common.ResultMapper
+import android.arch.persistence.room.*
 import com.model.UserPost
 
 /**
@@ -13,11 +9,21 @@ import com.model.UserPost
  */
 
 @Dao
-interface UserPostsDao {
+abstract class UserPostsDao {
 
     @Query("SELECT * FROM posts")
-    fun getAllPost(): LiveData<List<UserPost>>
+    abstract fun getAllPost(): LiveData<List<UserPost>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertData(listUserPost: List<UserPost>)
+    abstract fun insertData(listUserPost: List<UserPost>)
+
+
+    @Query("DELETE FROM posts")
+    abstract fun deleteAll()
+
+    @Transaction
+    open fun clearAndInsert(newSessions: List<UserPost>) {
+        deleteAll()
+        insertData(newSessions)
+    }
 }
