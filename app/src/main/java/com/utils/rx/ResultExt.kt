@@ -1,6 +1,7 @@
 package com.utils.rx
 
 import com.common.ResultMapper
+import com.model.UserPost
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
@@ -13,8 +14,12 @@ fun <T> Flowable<T>.toResult(schedulerProvider: SchedulerProvider): Flowable<Res
 
     return compose { item ->
         item
-                .map { ResultMapper.success(it) }
-                .onErrorReturn { e -> ResultMapper.error(e) }
+                .map {
+                    ResultMapper.success(it)
+                }
+                .onErrorReturn { e ->
+                    ResultMapper.error(e)
+                }
                 .observeOn(schedulerProvider.ui())
                 .subscribeOn(Schedulers.newThread())
     }

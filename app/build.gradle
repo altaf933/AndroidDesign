@@ -38,9 +38,14 @@ dependencies {
     kapt "se.ansman.kotshi:compiler:$kotshiVersion"
 
     // Android Architecture Components
+    def lifeCycleVersion = '1.0.0';
     implementation 'android.arch.lifecycle:runtime:1.0.3'
-    implementation 'android.arch.lifecycle:extensions:1.0.0'
-    implementation 'android.arch.lifecycle:reactivestreams:1.0.0'
+    implementation "android.arch.lifecycle:extensions:$lifeCycleVersion"
+    implementation "android.arch.lifecycle:reactivestreams:$lifeCycleVersion"
+
+    implementation "android.arch.persistence.room:runtime:$lifeCycleVersion"
+    implementation "android.arch.persistence.room:rxjava2:$lifeCycleVersion"
+    kapt "android.arch.persistence.room:compiler:$lifeCycleVersion"
 
     // RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.8'
