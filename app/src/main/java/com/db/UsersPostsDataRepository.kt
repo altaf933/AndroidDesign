@@ -22,13 +22,13 @@ class UsersPostsDataRepository @Inject constructor(private val api: ApiServices,
                                                    private val userPostsDao: UserPostsDao) : UsersPostsRepository {
     override fun remoteData(): LiveData<ResultMapper<List<UserPost>>> {
         return api.getUsersPost().toResult(schedulerProvider)
-                .compose { item ->
+                ?.compose { item ->
                     item.map {
                         savePosts(it)
                         it
                     }
                 }
-                .toLiveData()
+                ?.toLiveData()!!
     }
 
     override fun getPosts(): Flowable<List<UserPost>> {

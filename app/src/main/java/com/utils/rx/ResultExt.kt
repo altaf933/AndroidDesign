@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
  */
 
 
-fun <T> Flowable<T>.toResult(schedulerProvider: SchedulerProvider): Flowable<ResultMapper<T>> {
+fun <T> Flowable<T>.toResult(schedulerProvider: SchedulerProvider): Flowable<ResultMapper<T>>? {
 
     return compose { item ->
         item
