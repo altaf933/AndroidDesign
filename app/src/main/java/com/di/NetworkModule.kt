@@ -30,7 +30,7 @@ class NetworkModule {
     fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://jsonplaceholder.typicode.com")
+                .baseUrl("http://jsonplaceholder.typicode.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
                         .add(ApplicationJsonAdapterFactory.INSTANCE).add(LocalDateTime::class.java, LocalDateTimeAdapter())

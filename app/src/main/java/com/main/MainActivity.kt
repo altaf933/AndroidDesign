@@ -12,13 +12,13 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, FragmentReplaceListener {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject
-    lateinit var fragmentNavigate: FragmentNavigation;
+    lateinit var fragmentNavigate: FragmentNavigation
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
@@ -26,6 +26,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fragmentNavigate.replaceFragment(HomeFragment())
+        onFragmentChange(HomeFragment())
     }
+
+    override fun onFragmentChange(fragment: Fragment) {
+        fragmentNavigate.replaceFragment(fragment)
+    }
+
+}
+
+interface FragmentReplaceListener {
+    fun onFragmentChange(fragment: Fragment)
 }

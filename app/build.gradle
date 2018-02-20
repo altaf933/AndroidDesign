@@ -52,6 +52,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
+    def ktxVersion = '0.1'
+    implementation "androidx.core:core-ktx:$ktxVersion"
     // OkHttp
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 

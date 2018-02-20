@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.recycle_items.view.*
 /**
  * Created by altafshaikh on 09/02/18.
  */
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeDataViewHolder>() {
+class HomeAdapter(private var dataItemListener: DataItemListener) : RecyclerView.Adapter<HomeAdapter.HomeDataViewHolder>() {
 
     private var data = emptyList<UserPost>()
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeDataViewHolder {
@@ -22,6 +22,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeDataViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeDataViewHolder?, position: Int) {
         holder?.bind(data[position])
+        with(holder?.container) {
+            this?.setOnClickListener {
+                dataItemListener.getItemClickListener(data[position])
+            }
+        }
     }
 
     fun setData(data: List<UserPost>) {
@@ -32,10 +37,16 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeDataViewHolder>() {
     class HomeDataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(userPost: UserPost) {
             with(userPost) {
-                itemView.tvTitle.text= title
+                itemView.tvTitle.text = title
                 itemView.tvDescription.text = body
             }
         }
 
+        val container = itemView.container
+
+    }
+
+    interface DataItemListener {
+        fun getItemClickListener(userPost: UserPost)
     }
 }

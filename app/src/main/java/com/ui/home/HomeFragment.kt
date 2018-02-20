@@ -10,7 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.common.ResultMapper
+import com.main.FragmentReplaceListener
 import com.main.sample.R
+import com.model.UserPost
+import com.ui.homedetail.HomeDetailFragment
 
 import com.utils.rx.observe
 import dagger.android.support.AndroidSupportInjection
@@ -20,12 +23,14 @@ import javax.inject.Inject
 /**
  * Created by altafshaikh on 01/02/18.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeAdapter.DataItemListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var homeAdapter: HomeAdapter? = null
+
+    private var fragmentChangeListener: FragmentReplaceListener? = null
 
     private val viewModel: HomeViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
@@ -34,6 +39,12 @@ class HomeFragment : Fragment() {
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+        // Is the interface implemented ?
+        if(context !is FragmentReplaceListener)
+            throw ClassCastException(context.toString() + "must implement OnImageClickListener")
+        else
+            fragmentChangeListener = context
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,11 +66,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecycleView() {
-        homeAdapter = HomeAdapter()
+        homeAdapter = HomeAdapter(this)
         rvPosts.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = homeAdapter
         }
     }
 
+    override fun getItemClickListener(userPost: UserPost) {
+        var fragment = HomeDetailFragment.newInstance(userPost.id ?: 0)
+        fragmentChangeListener?.onFragmentChange(fragment)
+    }
 }

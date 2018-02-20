@@ -17,6 +17,7 @@ class FragmentNavigation @Inject constructor(private var appCompatActivity: AppC
     fun replaceFragment(fragment: Fragment) {
         fragmentManager.beginTransaction()
                 .replace(containerId, fragment)
+                .addToBackStack(null)
                 .commitAllowingStateLoss()
     }
 }
