@@ -1,4 +1,4 @@
-package com.ui
+package com.ui.home
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders

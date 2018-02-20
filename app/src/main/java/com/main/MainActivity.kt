@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.main.sample.R
-import com.ui.HomeFragment
+import com.ui.home.HomeFragment
 import com.utils.FragmentNavigation
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector

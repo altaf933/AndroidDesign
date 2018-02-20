@@ -1,9 +1,7 @@
 package com.di
 
-import android.arch.lifecycle.ViewModelProvider
-import com.factory.ViewModelFactory
-import com.ui.HomeFragment
-import dagger.Binds
+import com.ui.home.HomeFragment
+import com.ui.homedetail.HomeDetailFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,4 +14,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeHomeDetailFragment(): HomeDetailFragment
 }

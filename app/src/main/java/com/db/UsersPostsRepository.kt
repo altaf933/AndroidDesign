@@ -13,6 +13,8 @@ interface UsersPostsRepository {
 
     fun getPosts(): Flowable<List<UserPost>>
 
+    fun getPostsDetail(id: Int): LiveData<ResultMapper<UserPost>>
+
     fun savePosts(userPost: ResultMapper<List<UserPost>>)
 
     fun remoteData(): LiveData<ResultMapper<List<UserPost>>>

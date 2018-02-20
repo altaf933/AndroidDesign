@@ -1,4 +1,4 @@
-package com.ui
+package com.ui.home
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

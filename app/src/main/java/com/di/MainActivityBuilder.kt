@@ -19,5 +19,4 @@ abstract class MainActivityBuilder {
                 FragmentBuildersModule::class])
 
     abstract fun onMainActivity(): MainActivity
-
 }

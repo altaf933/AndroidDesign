@@ -16,5 +16,4 @@ import javax.inject.Singleton
 interface  MainActivityModule {
     @Binds
     fun provideMainActivity(mainActivity: MainActivity) : AppCompatActivity
-
 }

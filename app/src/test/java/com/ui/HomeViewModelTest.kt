@@ -8,6 +8,7 @@ import com.model.UserPost
 
 import android.arch.lifecycle.Observer
 import com.nhaarman.mockito_kotlin.*
+import com.ui.home.HomeViewModel
 
 import com.util.TestSchedulerProvider
 import io.reactivex.Completable
