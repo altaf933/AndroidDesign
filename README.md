@@ -15,4 +15,4 @@ To Do:
 
 ![alt text](https://github.com/altaf933/AndroidDesign/blob/master/Untitled%20Diagram.png)
 
-### Note: We are still in development phase.
+
